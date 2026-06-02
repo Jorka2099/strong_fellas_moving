@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-primary: #C24C3E;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #2C2C2C;
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #E8B923;
+  --color-accent-foreground: #1F1F1F;
+  --color-background: #FAF7F2;
+  --color-foreground: #1F1F1F;
+  --color-card: #ffffff;
+  --color-card-foreground: #1F1F1F;
+  --color-muted: #F5F1EB;
+  --color-muted-foreground: #6B6B6B;
+  --color-border: #E5E0D8;
+  --color-input: #E5E0D8;
+  --color-ring: #C24C3E;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1F1F1F;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --font-sans: var(--font-open-sans), 'Open Sans', system-ui, sans-serif;
+  --font-heading: var(--font-oswald), 'Oswald', 'Arial Black', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* Brand utility classes */
+.terracotta {
+  color: #C24C3E;
+}
+
+.terracotta-bg {
+  background-color: #C24C3E;
+}
+
+.strong-btn {
+  background-color: #C24C3E;
+  color: white;
+  transition: all 0.2s;
+}
+
+.strong-btn:hover {
+  background-color: #A13D32;
+  transform: translateY(-2px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

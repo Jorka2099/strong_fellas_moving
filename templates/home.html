@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strong Fellas Moving - Calgary</title>
+    
+    <link rel="stylesheet" href="/static/css/globals.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#c25e52',
+                            foreground: '#ffffff',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased">
+
+    {{template "header" .}}
+
+    <main class="bg-white text-gray-900">
+        {{template "hero" .}}
+        
+        {{template "quote" .}}
+    </main>
+
+    {{template "footer" .}}
+
+</body>
+</html>
