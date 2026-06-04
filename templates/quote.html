@@ -1,56 +1,233 @@
 {{define "quote"}}
-<section id="quote" class="py-16 bg-gray-50">
-  <div class="container mx-auto px-4 max-w-4xl">
-    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
-      
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Get a Free Moving Estimate</h2>
-        <p class="text-gray-600">Fill out the form below, and our team will get back to you within 30 minutes with an accurate quote.</p>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+<section id="quote" class="bg-[#b04a3f] py-16">
+  <div class="container mx-auto px-4 max-w-6xl">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <h2 class="text-3xl text-white mb-3"
+          style="font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:-0.02em;">
+        Request a Moving Crew
+      </h2>
+      <p class="text-red-100 text-base">Fill out the form below, and our team will get back to you within 30 minutes.</p>
+    </div>
+
+    <!-- Two-column layout: Services + Form -->
+    <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+      <!-- LEFT: Our Services -->
+      <div class="lg:w-2/5 w-full">
+        <p class="text-base font-bold tracking-widest text-white uppercase mb-6 text-center">Our Services</p>
+        <div class="grid grid-cols-2 gap-6">
+
+          <!-- Truck Loading & Unloading -->
+          <div class="flex flex-col gap-3">
+            <div class="w-12 h-12 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M1 3h13v13H1zM14 8h4l3 3v5h-7V8z"/>
+                <circle cx="5.5" cy="18.5" r="1.5" stroke="currentColor" fill="none"/>
+                <circle cx="18.5" cy="18.5" r="1.5" stroke="currentColor" fill="none"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white font-bold text-sm tracking-wide uppercase">Truck Loading &amp; Unloading</p>
+              <p class="text-red-200 text-xs mt-1 leading-relaxed">We load and unload your rental truck, trailer or van.</p>
+            </div>
+          </div>
+
+          <!-- Container & Pod Loading -->
+          <div class="flex flex-col gap-3">
+            <div class="w-12 h-12 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="6" width="20" height="12" rx="1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <line x1="6"  y1="6" x2="6"  y2="18"/>
+                <line x1="10" y1="6" x2="10" y2="18"/>
+                <line x1="14" y1="6" x2="14" y2="18"/>
+                <line x1="18" y1="6" x2="18" y2="18"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white font-bold text-sm tracking-wide uppercase">Container &amp; Pod Loading</p>
+              <p class="text-red-200 text-xs mt-1 leading-relaxed">Loading and unloading portable containers and storage pods.</p>
+            </div>
+          </div>
+
+          <!-- Internal Moves -->
+          <div class="flex flex-col gap-3">
+            <div class="w-12 h-12 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1v-9.5z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 21V12h6v9"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white font-bold text-sm tracking-wide uppercase">Internal Moves</p>
+              <p class="text-red-200 text-xs mt-1 leading-relaxed">Moving furniture and boxes within the same home or building.</p>
+            </div>
+          </div>
+
+          <!-- Assembly & Disassembly -->
+          <div class="flex flex-col gap-3">
+            <div class="w-12 h-12 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-4.244-4.243a4 4 0 01-.44-5.308l1.06 1.06a2.5 2.5 0 003.5-3.5L9.24 2.12a4 4 0 015.308.44l4.243 4.244"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l4 4"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white font-bold text-sm tracking-wide uppercase">Assembly &amp; Disassembly</p>
+              <p class="text-red-200 text-xs mt-1 leading-relaxed">Furniture assembly and disassembly services.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      <form action="/submit-quote" method="POST" class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Your Name</label>
-            <input type="text" name="name" required placeholder="John Doe" 
-                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all">
-          </div>
+      <!-- RIGHT: Form Card -->
+      <div class="lg:w-3/5 w-full">
+        <div class="bg-white rounded-xl shadow-2xl p-7">
+          <form action="/submit-quote" method="POST" class="space-y-5" id="quoteForm">
 
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-            <input type="tel" name="phone" required placeholder="(403) 123-4567" 
-                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all">
-          </div>
+            <!-- Name + Phone -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Your Name</label>
+                <input type="text" name="name" required placeholder="John Doe"
+                  pattern="^[A-Za-zА-Яа-яЁё\s]+$"
+                  title="Name can only contain letters and spaces"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Phone Number</label>
+                <input type="tel" name="phone" required placeholder="(403) 123-4567"
+                  pattern="^[0-9+\s()\-]+$"
+                  title="Phone can only contain digits and + - ( ) characters"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm">
+              </div>
+            </div>
 
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Moving From (Address / City)</label>
-            <input type="text" name="from" required placeholder="Calgary SE" 
-                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all">
-          </div>
+            <!-- From + To -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Moving From</label>
+                <input type="text" name="from" required placeholder="Calgary SE"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Moving To</label>
+                <input type="text" name="to" required placeholder="Airdrie"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm">
+              </div>
+            </div>
 
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Moving To (Address / City)</label>
-            <input type="text" name="to" required placeholder="Airdrie" 
-                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all">
-          </div>
+            <!-- Date + Fellas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Move Date</label>
+                <input type="date" name="date" id="moveDate" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm text-gray-700">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Number of Movers</label>
+                <select name="fellas" id="fellas"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm text-gray-700 bg-white">
+                  <option value="2" data-rate="95" selected>2 Fellas — $95/hr</option>
+                  <option value="3" data-rate="130">3 Fellas — $130/hr</option>
+                  <option value="4" data-rate="165">4 Fellas — $165/hr</option>
+                  <option value="5" data-rate="200">5 Fellas — $200/hr</option>
+                </select>
+              </div>
+            </div>
 
+            <!-- Hours slider -->
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-2">
+                Number of Hours:
+                <span id="hoursDisplay" class="text-[#c25e52] font-bold ml-1">3 hrs</span>
+              </label>
+              <input type="range" name="hours" id="hours"
+                min="2" max="16" step="1" value="3"
+                class="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[#c25e52] bg-gray-200">
+              <div class="flex justify-between text-xs text-gray-400 mt-1 px-0.5">
+                <span>2</span><span>4</span><span>6</span><span>8</span><span>10</span><span>12</span><span>14</span><span>16 hrs</span>
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Details (size of home, big items, etc. — preferred method of contact)</label>
+              <textarea name="details" rows="2"
+                placeholder="e.g., 2 bedroom apartment, heavy sofa and fridge. Preferred contact: call / text / email..."
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm resize-none"></textarea>
+            </div>
+
+            <!-- Estimate Widget -->
+            <div class="rounded-xl border-2 border-[#c25e52] bg-[#fdf4f3] px-5 py-4">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-semibold text-gray-700 uppercase tracking-wide">* Estimated Cost</span>
+                <span class="text-2xl font-extrabold text-[#c25e52]">
+                  <span id="estimateDisplay">$285</span><span class="text-base align-super">*</span>
+                </span>
+              </div>
+              <div class="text-xs text-gray-500 mb-3">
+                <span id="estimateBreakdown">2 movers × $95/hr × 3 hrs</span>
+              </div>
+              <p class="text-[10px] text-gray-400 leading-relaxed border-t border-gray-200 pt-3">
+                * This is a preliminary estimate based on the number of movers and hours selected. Actual moving time may vary
+                depending on factors such as walking distance from the truck, stairs, elevator availability, weather, parking,
+                access to the building, and the amount and type of items being moved. Final time and cost may be higher or
+                lower depending on the conditions on moving day.
+              </p>
+            </div>
+
+            <input type="hidden" name="total_price" id="totalPrice" value="285">
+
+            <!-- Submit -->
+            <button type="submit"
+              class="bg-[#c25e52] hover:bg-[#a94a3e] text-white font-bold text-sm px-8 py-4 rounded-lg shadow-md transition-all w-full tracking-widest uppercase">
+              Send Request
+            </button>
+
+          </form>
         </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Details (Size of home, big items, etc.)</label>
-          <textarea name="details" rows="4" placeholder="e.g., 2 bedroom apartment, need help with a heavy sofa and a fridge..." 
-                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all"></textarea>
-        </div>
-
-        <div class="text-center pt-4">
-          <button type="submit" class="bg-[#c25e52] hover:opacity-90 text-white font-bold text-lg px-12 py-4 rounded-lg shadow-md transition-all w-full md:w-auto">
-            Send Request
-          </button>
-        </div>
-      </form>
+      </div>
 
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    // Set min date to today
+    const dateEl = document.getElementById('moveDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateEl.setAttribute('min', today);
+
+    // Estimate calculator
+    const rates = { 2: 95, 3: 130, 4: 165, 5: 200 };
+    const fellasEl = document.getElementById('fellas');
+    const hoursEl = document.getElementById('hours');
+    const hoursDisplay = document.getElementById('hoursDisplay');
+    const estimateDisplay = document.getElementById('estimateDisplay');
+    const estimateBreakdown = document.getElementById('estimateBreakdown');
+    const totalPriceEl = document.getElementById('totalPrice');
+
+    function updateEstimate() {
+      const fellas = parseInt(fellasEl.value, 10);
+      const hours = parseInt(hoursEl.value, 10);
+      const rate = rates[fellas] || 95;
+      const total = rate * hours;
+      hoursDisplay.textContent = hours + ' hrs';
+      estimateDisplay.textContent = '$' + total.toLocaleString();
+      estimateBreakdown.textContent = fellas + ' movers × $' + rate + '/hr × ' + hours + ' hrs';
+      totalPriceEl.value = total;
+    }
+
+    fellasEl.addEventListener('change', updateEstimate);
+    hoursEl.addEventListener('input', updateEstimate);
+    updateEstimate();
+  })();
+</script>
 {{end}}

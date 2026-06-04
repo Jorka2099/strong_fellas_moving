@@ -1,56 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strong Fellas - Admin Panel</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f9f9f9; }
-        h1 { color: #333; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #e67e22; color: white; }
-        tr:hover { background-color: #f5f5f5; }
-        .badge { background: #34495e; color: white; padding: 4px 8px; border-radius: 3px; font-size: 0.9rem; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strong Fellas — Admin Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen flex flex-col font-sans antialiased">
 
-    <h1>Incoming Leads (Total: {{len .}})</h1>
-    <a href="/" style="color: #e67e22; text-decoration: none;">← Back to Website</a>
+  <!-- Top Bar -->
+  <header class="bg-[#c25e52] shadow-md">
+    <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+        </svg>
+        <span class="text-white font-bold text-xl tracking-tight">Strong Fellas — Admin Panel</span>
+      </div>
+      <a href="/" class="flex items-center gap-1.5 text-red-100 hover:text-white text-sm font-medium transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to Website
+      </a>
+    </div>
+  </header>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Date Received</th>
-                <th>Customer</th>
-                <th>Phone</th>
-                <th>From → To</th>
-                <th>Moving Date</th>
-                <th>Fellas</th>
-                <th>Details</th>
+  <!-- Main Content -->
+  <main class="flex-1 max-w-screen-2xl mx-auto w-full px-6 py-8">
+
+    <!-- Toolbar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Incoming Leads</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Total submissions: <span class="font-semibold text-gray-700">{{len .}}</span></p>
+      </div>
+      <a href="/admin/leads/export"
+         class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 6h18M3 14h12M3 18h8"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 16l2 2 4-4"/>
+        </svg>
+        Export to Excel
+      </a>
+    </div>
+
+    <!-- Table Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left">
+          <thead>
+            <tr class="bg-[#c25e52] text-white text-xs uppercase tracking-wider">
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">ID</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">Created At</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">Client Name</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">Phone</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">From Address</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">To Address</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">Moving Date</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">Movers</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">Est. Hours</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">Total Price</th>
+              <th class="px-4 py-3 font-semibold">Details</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
             {{range .}}
-            <tr>
-                <td><b>#{{.ID}}</b></td>
-                <td>{{.CreatedAt.Format "2006-01-02 15:04"}}</td>
-                <td>{{.Name}}</td>
-                <td><a href="tel:{{.Phone}}">{{.Phone}}</a></td>
-                <td>{{.MovingFrom}} <b>→</b> {{.MovingTo}}</td>
-                <td><span class="badge" style="background: #27ae60;">{{if .MovingDate}}{{.MovingDate}}{{else}}ASAP/Not set{{end}}</span></td>
-                <td><span class="badge">{{.FellasNumber}} Fellas</span></td>
-                <td><i style="color: #555;">{{.Details}}</i></td>
+            <tr class="hover:bg-gray-50 transition-colors">
+
+              <!-- ID -->
+              <td class="px-4 py-3 whitespace-nowrap">
+                <span class="inline-block bg-gray-100 text-gray-600 font-mono font-semibold text-xs px-2 py-0.5 rounded">#{{.ID}}</span>
+              </td>
+
+              <!-- Created At -->
+              <td class="px-4 py-3 whitespace-nowrap text-gray-500 text-xs">
+                {{.CreatedAt.Format "2006-01-02 15:04"}}
+              </td>
+
+              <!-- Client Name -->
+              <td class="px-4 py-3 whitespace-nowrap font-semibold text-gray-800">
+                {{.Name}}
+              </td>
+
+              <!-- Phone -->
+              <td class="px-4 py-3 whitespace-nowrap">
+                <a href="tel:{{.Phone}}" class="text-[#c25e52] hover:underline font-medium">{{.Phone}}</a>
+              </td>
+
+              <!-- From Address -->
+              <td class="px-4 py-3 whitespace-nowrap text-gray-700">{{.MovingFrom}}</td>
+
+              <!-- To Address -->
+              <td class="px-4 py-3 whitespace-nowrap text-gray-700">{{.MovingTo}}</td>
+
+              <!-- Moving Date -->
+              <td class="px-4 py-3 whitespace-nowrap">
+                {{if .MovingDate}}
+                  <span class="inline-block bg-emerald-100 text-emerald-700 font-medium text-xs px-2.5 py-0.5 rounded-full">{{.MovingDate}}</span>
+                {{else}}
+                  <span class="inline-block bg-amber-100 text-amber-600 font-medium text-xs px-2.5 py-0.5 rounded-full">ASAP / Not set</span>
+                {{end}}
+              </td>
+
+              <!-- Movers / Fellas -->
+              <td class="px-4 py-3 whitespace-nowrap">
+                <span class="inline-flex items-center gap-1 bg-[#fdf4f3] text-[#c25e52] font-semibold text-xs px-2.5 py-0.5 rounded-full border border-[#f0c4be]">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m6-4a4 4 0 11-8 0 4 4 0 018 0z"/>
+                  </svg>
+                  {{.FellasNumber}} Fellas
+                </span>
+              </td>
+
+              <!-- Estimated Hours -->
+              <td class="px-4 py-3 whitespace-nowrap">
+                <span class="inline-block bg-blue-50 text-blue-700 font-medium text-xs px-2.5 py-0.5 rounded-full">{{.Hours}} hrs</span>
+              </td>
+
+              <!-- Total Price -->
+              <td class="px-4 py-3 whitespace-nowrap">
+                <span class="font-bold text-gray-800">${{.TotalPrice}}</span>
+              </td>
+
+              <!-- Details -->
+              <td class="px-4 py-3 text-gray-500 italic max-w-xs truncate" title="{{.Details}}">
+                {{if .Details}}{{.Details}}{{else}}<span class="not-italic text-gray-300">—</span>{{end}}
+              </td>
+
             </tr>
             {{else}}
             <tr>
-                <td colspan="8" style="text-align: center; padding: 20px; color: #999;">No leads found yet.</td>
+              <td colspan="11" class="px-4 py-16 text-center">
+                <div class="flex flex-col items-center gap-2 text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                  <p class="text-sm font-medium">No leads found yet.</p>
+                  <p class="text-xs">Submissions will appear here once the form is filled out.</p>
+                </div>
+              </td>
             </tr>
             {{end}}
-        </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto py-5 text-center">
+    <p class="text-xs text-gray-400">Developed by <span class="font-medium text-gray-500">Jorka2099</span></p>
+  </footer>
 
 </body>
 </html>

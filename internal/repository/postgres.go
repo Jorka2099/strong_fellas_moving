@@ -16,6 +16,8 @@ type Lead struct {
 	MovingTo     string    `json:"moving_to"`
 	MovingDate   string    `json:"moving_date"`
 	FellasNumber int       `json:"fellas_number"`
+	Hours        int       `json:"hours"`
+	TotalPrice   int       `json:"total_price"`
 	Details      string    `json:"details"`
 	CreatedAt    time.Time `json:"created_at"`
 }
@@ -46,6 +48,8 @@ func InitDB() (*pgxpool.Pool, error) {
 		moving_to TEXT NOT NULL,
 		moving_date VARCHAR(50) NULL,
 		fellas_number INT NOT NULL,
+		hours INT NOT NULL DEFAULT 2,
+		total_price INT NOT NULL DEFAULT 0,
 		details TEXT,
 		created_at TIMESTAMPTZ DEFAULT NOW()
 	)
@@ -69,8 +73,8 @@ func SaveLead(pool *pgxpool.Pool, lead Lead) error {
 	defer cancel()
 
 	query := `
-		INSERT INTO leads (name, phone, moving_from, moving_to, moving_date, fellas_number, details) 
-		VALUES ($1, $2, $3, $4, $5, $6, $7)
+		INSERT INTO leads (name, phone, moving_from, moving_to, moving_date, fellas_number, hours, total_price, details) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 	`
 
 	_, err := pool.Exec(ctx, query,
@@ -80,6 +84,8 @@ func SaveLead(pool *pgxpool.Pool, lead Lead) error {
 		lead.MovingTo,
 		lead.MovingDate,
 		lead.FellasNumber,
+		lead.Hours,
+		lead.TotalPrice,
 		lead.Details,
 	)
 	if err != nil {
@@ -97,7 +103,9 @@ func GetAllLeads(pool *pgxpool.Pool) ([]Lead, error) {
 	defer cancel()
 
 	query := `
-	    SELECT id, name, phone, moving_from, moving_to, moving_date, fellas_number, details, created_at FROM leads ORDER BY created_at DESC;`
+		SELECT id, name, phone, moving_from, moving_to, moving_date, fellas_number, hours, total_price, details, created_at 
+		FROM leads 
+		ORDER BY created_at DESC;`
 
 	rows, err := pool.Query(ctx, query)
 	if err != nil {
@@ -109,7 +117,7 @@ func GetAllLeads(pool *pgxpool.Pool) ([]Lead, error) {
 
 	for rows.Next() {
 		var lead Lead
-		err := rows.Scan(&lead.ID, &lead.Name, &lead.Phone, &lead.MovingFrom, &lead.MovingTo, &lead.MovingDate, &lead.FellasNumber, &lead.Details, &lead.CreatedAt)
+		err := rows.Scan(&lead.ID, &lead.Name, &lead.Phone, &lead.MovingFrom, &lead.MovingTo, &lead.MovingDate, &lead.FellasNumber, &lead.Hours, &lead.TotalPrice, &lead.Details, &lead.CreatedAt)
 		if err != nil {
 			return nil, fmt.Errorf("unable to scan lead: %w", err)
 		}

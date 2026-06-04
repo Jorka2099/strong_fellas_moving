@@ -1,12 +1,26 @@
 {{define "header"}}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
 <header class="sticky top-0 z-50 bg-card opacity-95 backdrop-blur border-b border-border">
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between h-20">
-      
-      <a href="/" class="flex items-center gap-3">
-        <span class="font-bold text-xl uppercase tracking-wide text-foreground">Strong Fellas</span>
+
+      <!-- Logo + Brand -->
+      <a href="/" class="flex items-center gap-2.5 no-underline">
+        <img
+          src="/static/images/logo.png"
+          alt="Strong Fellas Moving Logo"
+          class="h-12 w-auto object-contain"
+        >
+        <div class="flex flex-col leading-tight"
+             style="font-family:'Montserrat',sans-serif; font-weight:800;">
+          <span class="text-foreground uppercase text-sm tracking-wide">Strong</span>
+          <span class="text-foreground uppercase text-sm tracking-wide">Fellas</span>
+          <span class="text-primary  uppercase text-sm tracking-wide">Moving</span>
+        </div>
       </a>
 
+      <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-8">
         <a href="#" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium transition-colors text-sm uppercase tracking-wide">Home</a>
         <a href="#services" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium transition-colors text-sm uppercase tracking-wide">Services</a>
@@ -15,36 +29,53 @@
         <a href="#contact" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium transition-colors text-sm uppercase tracking-wide">Contact</a>
       </nav>
 
+      <!-- Desktop CTA -->
       <div class="hidden lg:flex items-center gap-4">
         <a href="#quote" class="bg-primary hover:opacity-90 text-primary-foreground font-semibold px-6 py-2 rounded-md text-sm">
           Get a Free Estimate
         </a>
       </div>
 
+      <!-- Mobile Hamburger -->
       <button class="lg:hidden p-2 text-foreground" id="mobile-menu-btn" aria-label="Toggle menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"/>
+          <line x1="4" x2="20" y1="6"  y2="6"/>
+          <line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
       </button>
 
     </div>
   </div>
 
+  <!-- Mobile Menu -->
   <div class="hidden lg:hidden bg-card border-t border-border" id="mobile-menu">
     <nav class="container mx-auto px-4 py-4 flex flex-col gap-4">
-      <a href="#" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium py-2 transition-colors uppercase tracking-wide">Home</a>
+      <a href="#"        class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium py-2 transition-colors uppercase tracking-wide">Home</a>
       <a href="#services" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium py-2 transition-colors uppercase tracking-wide">Services</a>
-      <a href="#about" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium py-2 transition-colors uppercase tracking-wide">About Us</a>
+      <a href="#about"   class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium py-2 transition-colors uppercase tracking-wide">About Us</a>
       <a href="#reviews" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium py-2 transition-colors uppercase tracking-wide">Reviews</a>
       <a href="#contact" class="text-foreground opacity-80 hover:text-primary hover:opacity-100 font-medium py-2 transition-colors uppercase tracking-wide">Contact</a>
-      
+
       <div class="flex flex-col gap-3 pt-4 border-t border-border">
-        <a href="tel:403-903-4417" class="w-full flex justify-center items-center gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground py-2 rounded-md font-medium text-sm">
+        <a href="tel:403-903-4417"
+           class="w-full flex justify-center items-center gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground py-2 rounded-md font-medium text-sm">
           403-903-4417
         </a>
-        <a href="#quote" class="w-full text-center bg-primary hover:opacity-90 text-primary-foreground py-2 rounded-md font-semibold text-sm">
+        <a href="#quote"
+           class="w-full text-center bg-primary hover:opacity-90 text-primary-foreground py-2 rounded-md font-semibold text-sm">
           Get a Free Estimate
         </a>
       </div>
     </nav>
   </div>
 </header>
+
+<script>
+  document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+</script>
 {{end}}

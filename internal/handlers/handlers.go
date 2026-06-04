@@ -3,28 +3,35 @@ package handlers
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 	"strong-fellas/internal/repository"
+	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type QuoteRequest struct {
-	Name    string `json:"name"`
-	Phone   string `json:"phone"`
-	From    string `json:"from"`
-	To      string `json:"to"`
-	Date    string `json:"date"`
-	Fellas  string `json:"fellas"`
-	Details string `json:"details"`
+	Name       string
+	Phone      string
+	From       string
+	To         string
+	Date       string
+	Fellas     string
+	Hours      string
+	TotalPrice string
+	Details    string
 }
 
 func (q QuoteRequest) ToLead() repository.Lead {
 	fellasNum, err := strconv.Atoi(q.Fellas)
 	if err != nil {
-		fellasNum = 2 // default to 2 if conversion fails
+		fellasNum = 2
 	}
+	hoursNum, _ := strconv.Atoi(q.Hours)
+	priceNum, _ := strconv.Atoi(q.TotalPrice)
+
 	return repository.Lead{
 		Name:         q.Name,
 		Phone:        q.Phone,
@@ -32,6 +39,8 @@ func (q QuoteRequest) ToLead() repository.Lead {
 		MovingTo:     q.To,
 		MovingDate:   q.Date,
 		FellasNumber: fellasNum,
+		Hours:        hoursNum,
+		TotalPrice:   priceNum,
 		Details:      q.Details,
 	}
 }
@@ -79,29 +88,47 @@ func SubmitQuoteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	req := QuoteRequest{
-		Name:    r.FormValue("name"),
-		Phone:   r.FormValue("phone"),
-		From:    r.FormValue("from"),
-		To:      r.FormValue("to"),
-		Date:    r.FormValue("date"),
-		Fellas:  r.FormValue("fellas"),
-		Details: r.FormValue("details"),
+		Name:       r.FormValue("name"),
+		Phone:      r.FormValue("phone"),
+		From:       r.FormValue("from"),
+		To:         r.FormValue("to"),
+		Date:       r.FormValue("date"),
+		Fellas:     r.FormValue("fellas"),
+		Hours:      r.FormValue("hours"),
+		TotalPrice: r.FormValue("total_price"),
+		Details:    r.FormValue("details"),
 	}
 
-	if req.Name == "" || req.Phone == "" || req.From == "" || req.To == "" {
+	if req.Name == "" || req.Phone == "" || req.From == "" || req.To == "" || req.Date == "" {
 		http.Error(w, "Please fill in all required fields", http.StatusBadRequest)
 		return
 	}
+
+	parsedDate, err := time.Parse("2006-01-02", req.Date)
+	if err != nil {
+		http.Error(w, "Invalid date format", http.StatusBadRequest)
+		return
+	}
+
+	today := time.Now().Truncate(24 * time.Hour)
+	if parsedDate.Before(today) {
+		http.Error(w, "Moving date cannot be in the past", http.StatusBadRequest)
+		return
+	}
+
 	reqLeads := req.ToLead()
 
-	err := repository.SaveLead(DBPool, reqLeads)
+	err = repository.SaveLead(DBPool, reqLeads)
 	if err != nil {
-		http.Error(w, "Unable to save your request. Please try again later.", http.StatusInternalServerError)
+		log.Printf("DB error in SubmitQuoteHandler: %v\n", err)
+
+		http.Error(w, "Unable to save your request. Please try again later", http.StatusInternalServerError)
 		return
 	}
 
 	fmt.Println("============== NEW REQUEST! ==============")
-	fmt.Printf("Client: %s\nTel: %s\nFrom: %s\nWhere: %s\nDetails: %s\n", req.Name, req.Phone, req.From, req.To, req.Details)
+	fmt.Printf("Client: %s\nTel: %s\nFrom: %s\nWhere: %s\nDate: %s\nFellas: %d\nHours: %d\nTotal: $%d\nDetails: %s\n",
+		reqLeads.Name, reqLeads.Phone, reqLeads.MovingFrom, reqLeads.MovingTo, reqLeads.MovingDate, reqLeads.FellasNumber, reqLeads.Hours, reqLeads.TotalPrice, reqLeads.Details)
 	fmt.Println("===========================================")
 
 	w.Write([]byte("Thank you for your request! We will contact you soon."))
