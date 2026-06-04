@@ -17,17 +17,20 @@ func main() {
 	}
 	defer dbPool.Close()
 
+	handlers.DBPool = dbPool
+
 	tmpl = template.Must(template.ParseGlob("templates/*.html"))
 
 	fileServer := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
-	http.HandleFunc("/", handlers.HandleHome)
-	http.HandleFunc("/quote", handlers.HandleQuote)
+	http.HandleFunc("/", handlers.HomeHandler)
+	http.HandleFunc("/submit-quote", handlers.SubmitQuoteHandler)
+	http.HandleFunc("/admin/leads", handlers.AdminLeadsHandler)
 
 	log.Println("Server is running on http://localhost:8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
-		panic(err)
+		log.Fatalf("Failed to start server: %v\n", err)
 	}
 
 }

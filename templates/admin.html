@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strong Fellas - Admin Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f9f9f9; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #e67e22; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .badge { background: #34495e; color: white; padding: 4px 8px; border-radius: 3px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <h1>Incoming Leads (Total: {{len .}})</h1>
+    <a href="/" style="color: #e67e22; text-decoration: none;">← Back to Website</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date Received</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>From → To</th>
+                <th>Moving Date</th>
+                <th>Fellas</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}}
+            <tr>
+                <td><b>#{{.ID}}</b></td>
+                <td>{{.CreatedAt.Format "2006-01-02 15:04"}}</td>
+                <td>{{.Name}}</td>
+                <td><a href="tel:{{.Phone}}">{{.Phone}}</a></td>
+                <td>{{.MovingFrom}} <b>→</b> {{.MovingTo}}</td>
+                <td><span class="badge" style="background: #27ae60;">{{if .MovingDate}}{{.MovingDate}}{{else}}ASAP/Not set{{end}}</span></td>
+                <td><span class="badge">{{.FellasNumber}} Fellas</span></td>
+                <td><i style="color: #555;">{{.Details}}</i></td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="8" style="text-align: center; padding: 20px; color: #999;">No leads found yet.</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+
+</body>
+</html>
