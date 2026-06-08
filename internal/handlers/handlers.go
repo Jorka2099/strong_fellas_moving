@@ -99,7 +99,12 @@ func SubmitQuoteHandler(w http.ResponseWriter, r *http.Request) {
 		Details:    r.FormValue("details"),
 	}
 
-	if req.Name == "" || req.Phone == "" || req.From == "" || req.To == "" || req.Date == "" {
+	if req.From == "" && req.To == "" {
+		http.Error(w, "Please provide at least a 'Moving From' or 'Moving To' address", http.StatusBadRequest)
+		return
+	}
+
+	if req.Name == "" || req.Phone == "" || req.Date == "" {
 		http.Error(w, "Please fill in all required fields", http.StatusBadRequest)
 		return
 	}
@@ -132,4 +137,15 @@ func SubmitQuoteHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("===========================================")
 
 	w.Write([]byte("Thank you for your request! We will contact you soon."))
+}
+
+func AuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie(sessionCookieName)
+		if err != nil || !isValidSession(cookie.Value) {
+			http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
+			return
+		}
+		next.ServeHTTP(w, r)
+	}
 }
