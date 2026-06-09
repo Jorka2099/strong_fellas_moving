@@ -126,3 +126,19 @@ func GetAllLeads(pool *pgxpool.Pool) ([]Lead, error) {
 
 	return leads, nil
 }
+
+func DeleteLead(pool *pgxpool.Pool, id int) error {
+	if pool == nil {
+		return fmt.Errorf("database pool is nil")
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `DELETE FROM leads WHERE id = $1`
+	_, err := pool.Exec(ctx, query, id)
+	if err != nil {
+		return fmt.Errorf("unable to delete lead: %w", err)
+	}
+	return nil
+}

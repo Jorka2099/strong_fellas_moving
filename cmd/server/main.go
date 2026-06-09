@@ -38,6 +38,7 @@ func main() {
 
 	http.HandleFunc("/admin/login", handlers.AdminLoginHandler)
 	http.HandleFunc("/admin/leads", handlers.AuthMiddleware(handlers.AdminLeadsHandler))
+	http.HandleFunc("/admin/leads/delete", handlers.AuthMiddleware(handlers.AdminDeleteLeadHandler))
 	http.HandleFunc("/admin/logout", handlers.AdminLogoutHandler)
 
 	log.Println("Server is running on http://localhost:8080")

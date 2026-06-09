@@ -58,6 +58,34 @@ func AdminLeadsHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, leads)
 }
 
+// AdminDeleteLeadHandler deletes lead by ID
+func AdminDeleteLeadHandler(w http.ResponseWriter, r *http.Request) {
+	
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	
+	idStr := r.FormValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(w, "Invalid Lead ID", http.StatusBadRequest)
+		return
+	}
+
+	
+	err = repository.DeleteLead(DBPool, id) 
+	if err != nil {
+		log.Printf("Error deleting lead: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+
+	// После успешного удаления перенаправляем админа обратно на список лидов
+	http.Redirect(w, r, "/admin/leads", http.StatusSeeOther)
+}
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
@@ -70,6 +98,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		"templates/hero.html",
 		"templates/footer.html",
 		"templates/quote.html",
+		"templates/about.html",
 	)
 	if err != nil {
 		http.Error(w, "Internal Server Error"+err.Error(), http.StatusInternalServerError)
