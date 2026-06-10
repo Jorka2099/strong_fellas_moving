@@ -34,12 +34,29 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
 	http.HandleFunc("/", handlers.HomeHandler)
-	http.HandleFunc("/submit-quote", handlers.SubmitQuoteHandler)
+	http.HandleFunc("/submit-quote", handlers.RateLimitMiddleware(handlers.SubmitQuoteHandler))
 
-	http.HandleFunc("/admin/login", handlers.AdminLoginHandler)
+	http.HandleFunc("/privacy.html", func(w http.ResponseWriter, r *http.Request) {
+		// Рендерим напрямую сам файл privacy.html
+		err := tmpl.ExecuteTemplate(w, "privacy.html", nil)
+		if err != nil {
+			http.Error(w, "Template error: "+err.Error(), http.StatusInternalServerError)
+		}
+	})
+
+	http.HandleFunc("/terms.html", func(w http.ResponseWriter, r *http.Request) {
+		// Рендерим напрямую сам файл terms.html
+		err := tmpl.ExecuteTemplate(w, "terms.html", nil)
+		if err != nil {
+			http.Error(w, "Template error: "+err.Error(), http.StatusInternalServerError)
+		}
+	})
+
+	http.HandleFunc("/admin/login", handlers.RateLimitMiddleware(handlers.AdminLoginHandler))
 	http.HandleFunc("/admin/leads", handlers.AuthMiddleware(handlers.AdminLeadsHandler))
 	http.HandleFunc("/admin/leads/delete", handlers.AuthMiddleware(handlers.AdminDeleteLeadHandler))
 	http.HandleFunc("/admin/logout", handlers.AdminLogoutHandler)
+	http.HandleFunc("/admin/leads/export", handlers.AuthMiddleware(handlers.ExportLeadsHandler(dbPool)))
 
 	log.Println("Server is running on http://localhost:8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {

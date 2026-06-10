@@ -1,191 +1,150 @@
-{{define "terms"}}
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+{{define "terms.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions - Strong Fellas Moving</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<style>
-  .legal-inter      { font-family: 'Inter', sans-serif; }
-  .legal-montserrat { font-family: 'Montserrat', sans-serif; }
-  .legal-divider    { width: 40px; height: 3px; background: #c25e52; border-radius: 2px; }
+  <style>
+    .legal-inter      { font-family: 'Inter', sans-serif; }
+    .legal-montserrat { font-family: 'Montserrat', sans-serif; }
+    .legal-divider    { width: 40px; height: 3px; background: #c25e52; border-radius: 2px; }
 
-  .legal-section h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #111827;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
-  }
-  .legal-section p,
-  .legal-section li {
-    font-size: 0.9rem;
-    color: #4b5563;
-    line-height: 1.8;
-  }
-  .legal-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-  .legal-section ul li::before {
-    content: "—";
-    color: #c25e52;
-    margin-right: 0.6rem;
-    font-weight: 600;
-  }
-  .legal-section ol {
-    padding-left: 1.25rem;
-    margin: 0.5rem 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-</style>
+    .legal-section h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #111827;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .legal-section p,
+    .legal-section li {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .legal-section ul li::before {
+      content: "—";
+      color: #c25e52;
+      margin-right: 0.6rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 legal-inter">
 
-<!-- Header -->
-<section class="bg-[#1a1a1a] legal-inter pt-24 pb-16">
-  <div class="container mx-auto px-6 max-w-3xl">
-    <p class="text-[#c25e52] text-xs font-semibold tracking-[0.22em] uppercase mb-5 legal-montserrat">
-      Strong Fellas Moving
-    </p>
-    <h1 class="legal-montserrat font-black text-white text-4xl mb-5"
-        style="letter-spacing:-0.03em;">
-      Terms &amp; Conditions
-    </h1>
-    <p class="text-gray-400 text-sm">Effective Date: [Month Day, Year] &nbsp;·&nbsp; Province: Alberta, Canada</p>
-  </div>
-</section>
+  {{template "header" .}}
 
-<!-- Body -->
-<section class="bg-white py-20 legal-inter">
-  <div class="container mx-auto px-6 max-w-3xl">
-
-    <!-- Intro -->
-    <div class="mb-14 pb-10 border-b border-gray-100">
-      <div class="legal-divider mb-5"></div>
-      <p class="text-gray-600 text-sm leading-relaxed max-w-xl">
-        These Terms and Conditions govern the moving and labour services provided by
-        <strong class="text-gray-800 font-semibold">Strong Fellas Moving</strong>,
-        operating in Alberta, Canada. By booking our services you agree to the following terms.
+  <section class="bg-gray-900 pt-32 pb-16">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <p class="text-[#c25e52] text-xs font-semibold tracking-[0.22em] uppercase mb-4 legal-montserrat">
+        Strong Fellas Moving
       </p>
-      <p class="text-gray-500 text-xs mt-4">
-        Contact: [Phone] &nbsp;|&nbsp; [Email] &nbsp;|&nbsp; [Mailing Address]
-      </p>
+      <h1 class="legal-montserrat font-black text-white text-4xl md:text-5xl mb-4" style="letter-spacing:-0.03em;">
+        Terms &amp; Conditions
+      </h1>
+      <p class="text-gray-400 text-xs">Effective Date: June 10, 2026</p>
     </div>
+  </section>
 
-    <!-- Sections -->
-    <div class="flex flex-col gap-10">
+  <section class="bg-white py-16">
+    <div class="container mx-auto px-6 max-w-3xl">
 
-      <div class="legal-section">
-        <h3>1. Scope of Services</h3>
-        <p>Strong Fellas Moving provides moving and related labour services, which may include loading, unloading, packing, unpacking, furniture assembly/disassembly, in-home moves, and transportation, depending on the services booked by the customer.</p>
+      <div class="mb-12 pb-8 border-b border-gray-100">
+        <div class="legal-divider mb-5"></div>
+        <p class="text-gray-600 text-base leading-relaxed">
+          Welcome to <strong class="text-gray-800 font-semibold">Strong Fellas Moving</strong>. These Terms and Conditions govern your use of our website and our professional moving services. By requesting a quote, booking a move, or using our website, you agree to comply with and be bound by these terms.
+        </p>
       </div>
 
-      <div class="legal-section">
-        <h3>2. Estimates and Pricing</h3>
-        <p>Any quote or estimate is based on the information provided by the customer at the time of booking. Final charges may change if the scope of work differs from what was described, including but not limited to additional items, stairs, long carries, elevator delays, access issues, oversized items, or packing requirements.</p>
-        <p class="mt-3">Unless otherwise stated in writing, pricing may include:</p>
-        <ul>
-          <li>Hourly labour charges</li>
-          <li>Travel or dispatch charges</li>
-          <li>Truck or equipment charges</li>
-          <li>Fuel or mileage charges</li>
-          <li>Packing material charges</li>
-          <li>Applicable taxes</li>
-        </ul>
-        <p class="mt-3">Estimated times are not guaranteed completion times unless expressly stated in writing.</p>
+      <div class="flex flex-col gap-10">
+        
+        <div class="legal-section">
+          <h3>1. Services Offered</h3>
+          <p>Strong Fellas Moving provides professional moving labor assistance, including loading, unloading, packing, unpacking, and heavy lifting for homes, apartments, and offices. Unless explicitly stated otherwise, the client is responsible for renting and providing the moving truck or container.</p>
+        </div>
+
+        <div class="legal-section">
+          <h3>2. Estimates and Booking</h3>
+          <p>All quotes provided given over the phone, via email, or through our online form are estimates based on the information provided by the client. Final rates and hours are determined upon completion of the requested labor. To secure a booking, clients must provide accurate contact and location details.</p>
+        </div>
+
+        <div class="legal-section">
+          <h3>3. Cancellations and Rescheduling</h3>
+          <p>We understand that moving plans can change. We request that you notify us of any cancellations or rescheduling requests at least 48 hours prior to your scheduled move time. Failure to do so may result in a cancellation fee.</p>
+        </div>
+
+        <div class="legal-section">
+          <h3>4. Client Responsibilities</h3>
+          <p>To ensure a safe and efficient moving process, clients are expected to:</p>
+          <ul>
+            <li>Ensure the moving vehicle (truck, trailer, container) is parked safely and legally close to the location.</li>
+            <li>Have all items securely packed in boxes unless packing services were explicitly requested.</li>
+            <li>Disclose any extremely heavy or specialized items (e.g., pianos, safes, pool tables) prior to booking.</li>
+            <li>Provide a safe working environment free of hazardous conditions.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h3>5. Payments and Billing</h3>
+          <p>Payment is due immediately upon the completion of the moving services. We accept payments via standard methods as specified at the time of booking. We do not have any hidden fees, but additional time spent beyond the estimated hours will be billed at our hourly rate.</p>
+        </div>
+
+        <div class="legal-section">
+          <h3>6. Limitation of Liability and Valuation</h3>
+          <p>While our team takes the utmost care with your belongings, moving inherently carries risks. Strong Fellas Moving maintains standard liability coverage for items damaged directly due to mover negligence during handling. However, we are not liable for damages resulting from:</p>
+          <ul>
+            <li>Improperly packed boxes or items packed by the client.</li>
+            <li>Mechanical or electronic derangement of appliances or electronics without external signs of damage.</li>
+            <li>Structural issues or tight spaces at the moving locations that pose a risk to oversized items.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h3>7. Governing Law</h3>
+          <p>These Terms and Conditions are governed by and construed in accordance with the laws of the Province of Alberta, Canada, without regard to its conflict of law principles.</p>
+        </div>
+
+        <div class="legal-section">
+          <h3>8. Changes to These Terms</h3>
+          <p>We reserve the right to modify these Terms and Conditions at any time. Any updates will be posted directly to this page with an updated effective date. Continued use of our services after updates are posted constitutes acceptance of the new terms.</p>
+        </div>
+
+        <div class="legal-section">
+          <h3>9. Contact Information</h3>
+          <p>If you have any questions, concerns, or clarifications regarding these Terms and Conditions, please contact us at:</p>
+          <div class="mt-3 bg-gray-50 rounded-xl p-5 text-sm text-gray-600 leading-relaxed border border-gray-100">
+            <p class="font-semibold text-gray-800 mb-1">Strong Fellas Moving</p>
+            <p>strongfellasmoving@gmail.com</p>
+            <p>403-903-4417</p>
+            <p>Calgary &amp; Surrounding Areas</p>
+          </div>
+        </div>
       </div>
 
-      <div class="legal-section">
-        <h3>3. Customer Responsibilities</h3>
-        <p>The customer agrees to:</p>
-        <ul>
-          <li>Provide accurate information about the move</li>
-          <li>Ensure reasonable access to the origin and destination</li>
-          <li>Reserve elevators, parking, and loading areas where required</li>
-          <li>Ensure walkways are clear and safe</li>
-          <li>Identify fragile, high-value, or special-care items before service begins</li>
-          <li>Be present or have an authorized representative present during the move, unless otherwise agreed</li>
-        </ul>
+      <div class="mt-16 pt-8 border-t border-gray-100 flex flex-wrap gap-4 justify-between items-center">
+        <a href="/" class="text-sm text-gray-400 hover:text-[#c25e52] transition-colors">← Back to Home</a>
+        <a href="/privacy.html" class="text-sm text-[#c25e52] font-medium hover:underline">Privacy Policy →</a>
       </div>
-
-      <div class="legal-section">
-        <h3>4. Prohibited and Restricted Items</h3>
-        <p>Strong Fellas Moving does not transport illegal items, hazardous materials, flammables, explosives, firearms, ammunition, perishable goods, live animals, cash, jewelry, important documents, or other items that are unsafe or unsuitable for transport, unless expressly agreed in writing and legally permitted.</p>
-        <p class="mt-2">Customers are responsible for removing personal valuables and irreplaceable items before service begins.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>5. Delays, Access Issues, and Conditions Beyond Our Control</h3>
-        <p>Strong Fellas Moving is not responsible for delays or inability to perform caused by weather, road closures, mechanical breakdowns, traffic, elevator outages, building restrictions, unsafe conditions, third-party delays, or other circumstances beyond reasonable control. Where possible, we will communicate delays and work in good faith to complete the service safely and efficiently.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>6. Damage, Loss, and Liability</h3>
-        <p>Strong Fellas Moving will exercise reasonable care in performing services. However:</p>
-        <ul>
-          <li>We are not responsible for pre-existing damage, ordinary wear and tear, or damage caused by poor packing by the customer</li>
-          <li>We are not responsible for damage to items packed by the customer unless caused by our negligent handling</li>
-          <li>We are not responsible for concealed damage to contents of sealed boxes packed by the customer</li>
-          <li>We are not responsible for damage resulting from customer instructions contrary to our recommendations</li>
-        </ul>
-        <p class="mt-3">To the maximum extent permitted by law, our liability for loss or damage is limited to the lesser of:</p>
-        <ol>
-          <li>The cost to repair the item</li>
-          <li>The current fair market value of the item</li>
-          <li>The amount paid for the affected service</li>
-        </ol>
-        <p class="mt-3">Customers should inspect their belongings promptly after the move and report any concerns as soon as reasonably possible.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>7. Payment Terms</h3>
-        <p>Payment is due upon completion of the service unless otherwise agreed in writing. We may require a deposit to confirm a booking. Deposits may be non-refundable or partially refundable as stated at the time of booking.</p>
-        <p class="mt-2">Accepted payment methods: [cash / e-transfer / debit / credit card / other].</p>
-        <p class="mt-2">Overdue amounts may be subject to reasonable collection costs and interest where permitted by law.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>8. Cancellation and Rescheduling</h3>
-        <p>Cancellation and rescheduling requests should be made as early as possible. Deposits and cancellation fees, if any, will be handled according to the booking terms provided to the customer at the time of scheduling.</p>
-        <p class="mt-2">We reserve the right to refuse or stop work where conditions are unsafe, unlawful, abusive, or materially different from what was booked.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>9. Storage and Third-Party Services</h3>
-        <p>If storage, disposal, packing supplies, or other third-party services are arranged, separate terms may apply. Strong Fellas Moving is not responsible for the acts or omissions of independent third parties.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>10. Photos and Documentation</h3>
-        <p>We may document the condition of property, access conditions, and moved items before, during, or after service for operational, insurance, quality-control, or dispute-resolution purposes.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>11. Privacy</h3>
-        <p>Personal information collected in connection with bookings and services is handled in accordance with our <a href="/privacy" class="text-[#c25e52] hover:underline font-medium">Privacy Policy</a>.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>12. Governing Law</h3>
-        <p>These Terms are governed by the laws of Alberta and the applicable laws of Canada. Any dispute will be brought before the courts of Alberta unless applicable law requires otherwise.</p>
-      </div>
-
-      <div class="legal-section">
-        <h3>13. Changes to These Terms</h3>
-        <p>We may update these Terms from time to time. The version in effect on the date of service will apply unless otherwise required by law.</p>
-      </div>
-
     </div>
+  </section>
 
-    <!-- Footer nav -->
-    <div class="mt-16 pt-8 border-t border-gray-100 flex flex-wrap gap-4 justify-between items-center">
-      <a href="/" class="text-sm text-gray-400 hover:text-[#c25e52] transition-colors">← Back to Home</a>
-      <a href="/privacy" class="text-sm text-[#c25e52] font-medium hover:underline">Privacy Policy →</a>
-    </div>
+  {{template "footer" .}}
 
-  </div>
-</section>
-
+</body>
+</html>
 {{end}}

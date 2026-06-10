@@ -1,179 +1,183 @@
-{{define "privacy"}}
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+{{define "privacy.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Strong Fellas Moving</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<style>
-  .legal-inter      { font-family: 'Inter', sans-serif; }
-  .legal-montserrat { font-family: 'Montserrat', sans-serif; }
-  .legal-divider    { width: 40px; height: 3px; background: #c25e52; border-radius: 2px; }
+  <style>
+    .legal-inter      { font-family: 'Inter', sans-serif; }
+    .legal-montserrat { font-family: 'Montserrat', sans-serif; }
+    .legal-divider    { width: 40px; height: 3px; background: #c25e52; border-radius: 2px; }
 
-  .legal-section h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #111827;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
-  }
-  .legal-section p,
-  .legal-section li {
-    font-size: 0.9rem;
-    color: #4b5563;
-    line-height: 1.8;
-  }
-  .legal-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-  .legal-section ul li::before {
-    content: "—";
-    color: #c25e52;
-    margin-right: 0.6rem;
-    font-weight: 600;
-  }
-</style>
+    .legal-section h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #111827;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .legal-section p,
+    .legal-section li {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .legal-section ul li::before {
+      content: "—";
+      color: #c25e52;
+      margin-right: 0.6rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 legal-inter">
 
-<!-- Header -->
-<section class="bg-[#1a1a1a] legal-inter pt-24 pb-16">
-  <div class="container mx-auto px-6 max-w-3xl">
-    <p class="text-[#c25e52] text-xs font-semibold tracking-[0.22em] uppercase mb-5 legal-montserrat">
-      Strong Fellas Moving
-    </p>
-    <h1 class="legal-montserrat font-black text-white text-4xl mb-5"
-        style="letter-spacing:-0.03em;">
-      Privacy Policy
-    </h1>
-    <p class="text-gray-400 text-sm">Effective Date: [Month Day, Year]</p>
-  </div>
-</section>
+  {{template "header" .}}
 
-<!-- Body -->
-<section class="bg-white py-20 legal-inter">
-  <div class="container mx-auto px-6 max-w-3xl">
-
-    <!-- Intro -->
-    <div class="mb-14 pb-10 border-b border-gray-100">
-      <div class="legal-divider mb-5"></div>
-      <p class="text-gray-600 text-sm leading-relaxed max-w-xl">
-        <strong class="text-gray-800 font-semibold">Strong Fellas Moving</strong> respects your privacy and is committed to handling personal information responsibly. This Policy explains what we collect, why we collect it, and how we protect it.
+  <section class="bg-gray-900 pt-32 pb-16">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <p class="text-[#c25e52] text-xs font-semibold tracking-[0.22em] uppercase mb-4 legal-montserrat">
+        Strong Fellas Moving
       </p>
-      <p class="text-gray-500 text-xs mt-4">
-        Contact for Privacy Requests: [Privacy Contact Name] &nbsp;|&nbsp; [Email] &nbsp;|&nbsp; [Phone] &nbsp;|&nbsp; [Mailing Address]
-      </p>
+      <h1 class="legal-montserrat font-black text-white text-4xl md:text-5xl mb-4" style="letter-spacing:-0.03em;">
+        Privacy Policy
+      </h1>
+      <p class="text-gray-400 text-xs">Effective Date: June 10, 2026</p>
     </div>
+  </section>
 
-    <!-- Sections -->
-    <div class="flex flex-col gap-10">
+  <section class="bg-white py-16">
+    <div class="container mx-auto px-6 max-w-3xl">
 
-      <div class="legal-section">
-        <h3>1. What We Collect</h3>
-        <p>We may collect personal information such as:</p>
-        <ul>
-          <li>Name</li>
-          <li>Phone number and email address</li>
-          <li>Service addresses and postal codes</li>
-          <li>Billing information</li>
-          <li>Move details, including inventory descriptions and scheduling information</li>
-          <li>Communications with us</li>
-          <li>Photos or notes related to the move, where reasonably required</li>
-          <li>Website usage information such as IP address, browser type, pages visited, and cookies</li>
-        </ul>
+      <div class="mb-12 pb-8 border-b border-gray-100">
+        <div class="legal-divider mb-5"></div>
+        <p class="text-gray-600 text-base leading-relaxed">
+          <strong class="text-gray-800 font-semibold">Strong Fellas Moving</strong> respects your privacy and is committed to handling personal information responsibly. This Policy explains what we collect, why we collect it, and how we protect it.
+        </p>
       </div>
 
-      <div class="legal-section">
-        <h3>2. Why We Collect It</h3>
-        <p>We collect personal information for reasonable business purposes, including to:</p>
-        <ul>
-          <li>Provide quotes and book services</li>
-          <li>Communicate about your move and confirm appointments</li>
-          <li>Dispatch crews and process payments</li>
-          <li>Maintain service records and respond to questions or complaints</li>
-          <li>Improve our services and website</li>
-          <li>Meet legal, insurance, safety, and recordkeeping requirements</li>
-        </ul>
-      </div>
+      <div class="flex flex-col gap-10">
+        <div class="legal-section">
+          <h3>1. What We Collect</h3>
+          <p>We may collect personal information such as:</p>
+          <ul>
+            <li>Name</li>
+            <li>Phone number and email address</li>
+            <li>Service addresses and postal codes</li>
+            <li>Billing information</li>
+            <li>Move details, including inventory descriptions and scheduling information</li>
+            <li>Communications with us</li>
+            <li>Photos or notes related to the move, where reasonably required</li>
+            <li>Website usage information such as IP address, browser type, pages visited, and cookies</li>
+          </ul>
+        </div>
 
-      <div class="legal-section">
-        <h3>3. Consent</h3>
-        <p>By contacting us, requesting a quote, booking services, or providing information to us, you consent to our collection, use, and disclosure of personal information for the purposes described in this Policy, except where applicable law requires otherwise.</p>
-        <p class="mt-2">You may withdraw consent subject to legal or contractual restrictions and reasonable notice. Withdrawing consent may affect our ability to provide services.</p>
-      </div>
+        <div class="legal-section">
+          <h3>2. Why We Collect It</h3>
+          <p>We collect personal information for reasonable business purposes, including to:</p>
+          <ul>
+            <li>Provide quotes and book services</li>
+            <li>Communicate about your move and confirm appointments</li>
+            <li>Dispatch crews and process payments</li>
+            <li>Maintain service records and respond to questions or complaints</li>
+            <li>Improve our services and website</li>
+            <li>Meet legal, insurance, safety, and recordkeeping requirements</li>
+          </ul>
+        </div>
 
-      <div class="legal-section">
-        <h3>4. How We Share Information</h3>
-        <p>We do not sell personal information. We may share it only where reasonably necessary, including with:</p>
-        <ul>
-          <li>Employees and contractors who need it to perform services</li>
-          <li>Payment processors and insurers</li>
-          <li>Software providers used for booking, invoicing, dispatch, or customer communications</li>
-          <li>Legal, regulatory, or law-enforcement authorities where required or permitted by law</li>
-        </ul>
-      </div>
+        <div class="legal-section">
+          <h3>3. Consent</h3>
+          <p>By contacting us, requesting a quote, booking services, or providing information to us, you consent to our collection, use, and disclosure of personal information for the purposes described in this Policy, except where applicable law requires otherwise.</p>
+          <p class="mt-2">You may withdraw consent subject to legal or contractual restrictions and reasonable notice. Withdrawing consent may affect our ability to provide services.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>5. Marketing Communications</h3>
-        <p>If we send commercial electronic messages, we will do so in accordance with applicable Canadian anti-spam law. Marketing emails or texts will include identification information and an unsubscribe method where required.</p>
-      </div>
+        <div class="legal-section">
+          <h3>4. How We Share Information</h3>
+          <p>We do not sell personal information. We may share it only where reasonably necessary, including with:</p>
+          <ul>
+            <li>Employees and contractors who need it to perform services</li>
+            <li>Payment processors and insurers</li>
+            <li>Software providers used for booking, invoicing, dispatch, or customer communications</li>
+            <li>Legal, regulatory, or law-enforcement authorities where required or permitted by law</li>
+          </ul>
+        </div>
 
-      <div class="legal-section">
-        <h3>6. Retention</h3>
-        <p>We keep personal information only as long as reasonably necessary for legal or business purposes, after which it will be securely destroyed, deleted, or anonymized.</p>
-      </div>
+        <div class="legal-section">
+          <h3>5. Marketing Communications</h3>
+          <p>If we send commercial electronic messages, we will do so in accordance with applicable Canadian anti-spam law. Marketing emails or texts will include identification information and an unsubscribe method where required.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>7. Protection of Information</h3>
-        <p>We use reasonable administrative, technical, and physical safeguards to protect personal information against loss, theft, unauthorized access, disclosure, copying, use, or modification. No method of transmission or storage is completely secure, but we take reasonable steps appropriate to the sensitivity of the information.</p>
-      </div>
+        <div class="legal-section">
+          <h3>6. Retention</h3>
+          <p>We keep personal information only as long as reasonably necessary for legal or business purposes, after which it will be securely destroyed, deleted, or anonymized.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>8. Access and Correction</h3>
-        <p>You may request access to your personal information or request correction of inaccurate information by contacting us using the contact details above. We will respond in accordance with applicable law.</p>
-      </div>
+        <div class="legal-section">
+          <h3>7. Protection of Information</h3>
+          <p>We use reasonable administrative, technical, and physical safeguards to protect personal information against loss, theft, unauthorized access, disclosure, copying, use, or modification. No method of transmission or storage is completely secure, but we take reasonable steps appropriate to the sensitivity of the information.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>9. Cookies and Website Analytics</h3>
-        <p>If you use our website, we may use cookies or similar technologies to improve website functionality, understand website traffic, and support marketing or analytics. You can usually manage cookies through your browser settings.</p>
-      </div>
+        <div class="legal-section">
+          <h3>8. Access and Correction</h3>
+          <p>You may request access to your personal information or request correction of inaccurate information by contacting us using the contact details below. We will respond in accordance with applicable law.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>10. Third-Party Sites</h3>
-        <p>Our website or communications may contain links to third-party sites or services. We are not responsible for the privacy practices of third parties.</p>
-      </div>
+        <div class="legal-section">
+          <h3>9. Cookies and Website Analytics</h3>
+          <p>If you use our website, we may use cookies or similar technologies to improve website functionality, understand website traffic, and support marketing or analytics. You can usually manage cookies through your browser settings.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>11. Children's Information</h3>
-        <p>Our services are intended for adults arranging moving services. We do not knowingly collect personal information from children except where provided by a parent or guardian as part of a move.</p>
-      </div>
+        <div class="legal-section">
+          <h3>10. Third-Party Sites</h3>
+          <p>Our website or communications may contain links to third-party sites or services. We are not responsible for the privacy practices of third parties.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>12. Changes to This Policy</h3>
-        <p>We may update this Privacy Policy from time to time. The current version will be posted on our website with the effective date.</p>
-      </div>
+        <div class="legal-section">
+          <h3>11. Children's Information</h3>
+          <p>Our services are intended for adults arranging moving services. We do not knowingly collect personal information from children except where provided by a parent or guardian as part of a move.</p>
+        </div>
 
-      <div class="legal-section">
-        <h3>13. Contact Us</h3>
-        <p>For privacy questions, access requests, corrections, or complaints, contact:</p>
-        <div class="mt-3 bg-gray-50 rounded-xl p-5 text-sm text-gray-600 leading-relaxed border border-gray-100">
-          <p class="font-semibold text-gray-800 mb-1">Strong Fellas Moving</p>
-          <p>[Privacy Contact Name]</p>
-          <p>[Email]</p>
-          <p>[Phone]</p>
-          <p>[Mailing Address]</p>
+        <div class="legal-section">
+          <h3>12. Changes to This Policy</h3>
+          <p>We may update this Privacy Policy from time to time. The current version will be posted on our website with the effective date.</p>
+        </div>
+
+        <div class="legal-section">
+          <h3>13. Contact Us</h3>
+          <p>For privacy questions, access requests, corrections, or complaints, contact:</p>
+          <div class="mt-3 bg-gray-50 rounded-xl p-5 text-sm text-gray-600 leading-relaxed border border-gray-100">
+            <p class="font-semibold text-gray-800 mb-1">Strong Fellas Moving</p>
+            <p>strongfellasmoving@gmail.com</p>
+            <p>403-903-4417</p>
+            <p>Calgary & Surrounding Areas</p>
+          </div>
         </div>
       </div>
 
+      <div class="mt-16 pt-8 border-t border-gray-100 flex flex-wrap gap-4 justify-between items-center">
+        <a href="/" class="text-sm text-gray-400 hover:text-[#c25e52] transition-colors">← Back to Home</a>
+        <a href="/terms.html" class="text-sm text-[#c25e52] font-medium hover:underline">Terms &amp; Conditions →</a>
+      </div>
     </div>
+  </section>
 
-    <!-- Footer nav -->
-    <div class="mt-16 pt-8 border-t border-gray-100 flex flex-wrap gap-4 justify-between items-center">
-      <a href="/" class="text-sm text-gray-400 hover:text-[#c25e52] transition-colors">← Back to Home</a>
-      <a href="/terms" class="text-sm text-[#c25e52] font-medium hover:underline">Terms &amp; Conditions →</a>
-    </div>
+  {{template "footer" .}}
 
-  </div>
-</section>
-
+</body>
+</html>
 {{end}}

@@ -24,6 +24,7 @@ type QuoteRequest struct {
 	Details    string
 }
 
+// ToLead converts QuoteRequest to Lead struct for database storage and Telegram notification.
 func (q QuoteRequest) ToLead() repository.Lead {
 	fellasNum, err := strconv.Atoi(q.Fellas)
 	if err != nil {
@@ -60,13 +61,12 @@ func AdminLeadsHandler(w http.ResponseWriter, r *http.Request) {
 
 // AdminDeleteLeadHandler deletes lead by ID
 func AdminDeleteLeadHandler(w http.ResponseWriter, r *http.Request) {
-	
+
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	
 	idStr := r.FormValue("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -74,8 +74,7 @@ func AdminDeleteLeadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
-	err = repository.DeleteLead(DBPool, id) 
+	err = repository.DeleteLead(DBPool, id)
 	if err != nil {
 		log.Printf("Error deleting lead: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -99,6 +98,8 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		"templates/footer.html",
 		"templates/quote.html",
 		"templates/about.html",
+		"templates/privacy.html",
+		"templates/terms.html",
 	)
 	if err != nil {
 		http.Error(w, "Internal Server Error"+err.Error(), http.StatusInternalServerError)
@@ -128,8 +129,8 @@ func SubmitQuoteHandler(w http.ResponseWriter, r *http.Request) {
 		Details:    r.FormValue("details"),
 	}
 
-	if req.From == "" && req.To == "" {
-		http.Error(w, "Please provide at least a 'Moving From' or 'Moving To' address", http.StatusBadRequest)
+	if req.From == "" {
+		http.Error(w, "Please provide a 'Moving From' address", http.StatusBadRequest)
 		return
 	}
 
@@ -152,6 +153,8 @@ func SubmitQuoteHandler(w http.ResponseWriter, r *http.Request) {
 
 	reqLeads := req.ToLead()
 
+	go sendTelegramNotification(reqLeads)
+
 	err = repository.SaveLead(DBPool, reqLeads)
 	if err != nil {
 		log.Printf("DB error in SubmitQuoteHandler: %v\n", err)
@@ -165,7 +168,9 @@ func SubmitQuoteHandler(w http.ResponseWriter, r *http.Request) {
 		reqLeads.Name, reqLeads.Phone, reqLeads.MovingFrom, reqLeads.MovingTo, reqLeads.MovingDate, reqLeads.FellasNumber, reqLeads.Hours, reqLeads.TotalPrice, reqLeads.Details)
 	fmt.Println("===========================================")
 
-	w.Write([]byte("Thank you for your request! We will contact you soon."))
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status":"success"}`))
 }
 
 func AuthMiddleware(next http.HandlerFunc) http.HandlerFunc {

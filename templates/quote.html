@@ -146,14 +146,13 @@
               </div>
             </div>
 
-            <!-- From + To (optional) -->
+            <!-- From (required) + To (optional) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-semibold text-gray-700 mb-1">
-                  Moving From
-                  <span class="text-gray-400 font-normal">(optional)</span>
+                  Moving From <span class="text-[#c25e52]">*</span>
                 </label>
-                <input type="text" name="from" id="fieldFrom" placeholder="Calgary SE — optional"
+                <input type="text" name="from" id="fieldFrom" required placeholder="Calgary SE"
                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm">
               </div>
               <div>
@@ -165,14 +164,6 @@
                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#c25e52] focus:border-[#c25e52] outline-none transition-all text-sm">
               </div>
             </div>
-
-            <!-- Address error -->
-            <p id="addressError" class="hidden text-xs text-red-600 -mt-3 flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-              </svg>
-              Please fill in at least one address (Moving From or Moving To).
-            </p>
 
             <!-- Date + Fellas -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -239,8 +230,8 @@
             <input type="hidden" name="total_price" id="totalPrice" value="285">
 
             <!-- Submit -->
-            <button type="submit"
-              class="bg-[#c25e52] hover:bg-[#a94a3e] text-white font-bold text-sm px-8 py-4 rounded-lg shadow-md transition-all w-full tracking-widest uppercase">
+            <button type="submit" id="submitBtn"
+              class="bg-[#c25e52] hover:bg-[#a94a3e] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-sm px-8 py-4 rounded-lg shadow-md transition-all w-full tracking-widest uppercase">
               Send Request
             </button>
 
@@ -252,14 +243,59 @@
   </div>
 </section>
 
+<!-- ── Success Modal ─────────────────────────────────────────── -->
+<div id="successModal"
+     class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden"
+     role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+  <!-- Backdrop -->
+  <div id="modalBackdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+  <!-- Card -->
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-10 text-center z-10
+              animate-[fadeInUp_0.3s_ease_both]">
+
+    <!-- Checkmark icon -->
+    <div class="w-16 h-16 rounded-full bg-[#fdf4f3] flex items-center justify-center mx-auto mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-[#c25e52]" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+
+    <h3 id="modalTitle"
+        class="text-2xl font-black text-gray-900 mb-3 tracking-tight"
+        style="font-family:'Montserrat',sans-serif;">
+      Request Received!
+    </h3>
+    <p class="text-gray-500 text-sm leading-relaxed mb-8">
+      Thank you! We've got your request and will get back to you
+      <span class="font-semibold text-gray-700">within 30 minutes</span>.
+    </p>
+
+    <button id="modalClose"
+            class="bg-[#c25e52] hover:bg-[#a94a3e] text-white font-bold text-sm px-8 py-3 rounded-lg transition-colors tracking-widest uppercase w-full"
+            style="font-family:'Montserrat',sans-serif;">
+      Got it!
+    </button>
+  </div>
+</div>
+
+<style>
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+</style>
+
 <script>
   (function () {
-    // Min date = today
-    const dateEl = document.getElementById('moveDate');
-    dateEl.setAttribute('min', new Date().toISOString().split('T')[0]);
+    // ── Min date = today ────────────────────────────────────────────
+    document.getElementById('moveDate')
+      .setAttribute('min', new Date().toISOString().split('T')[0]);
 
-    // Estimate calculator
-    const rates = { 2: 95, 3: 130, 4: 165, 5: 200 };
+    // ── Estimate calculator ─────────────────────────────────────────
+    const rates    = { 2: 95, 3: 130, 4: 165, 5: 200 };
     const fellasEl = document.getElementById('fellas');
     const hoursEl  = document.getElementById('hours');
 
@@ -268,42 +304,69 @@
       const hours  = parseInt(hoursEl.value, 10);
       const rate   = rates[fellas] || 95;
       const total  = rate * hours;
-      document.getElementById('hoursDisplay').textContent     = hours + ' hrs';
-      document.getElementById('estimateDisplay').textContent  = '$' + total.toLocaleString();
+      document.getElementById('hoursDisplay').textContent      = hours + ' hrs';
+      document.getElementById('estimateDisplay').textContent   = '$' + total.toLocaleString();
       document.getElementById('estimateBreakdown').textContent = fellas + ' movers × $' + rate + '/hr × ' + hours + ' hrs';
-      document.getElementById('totalPrice').value             = total;
+      document.getElementById('totalPrice').value              = total;
     }
 
     fellasEl.addEventListener('change', updateEstimate);
-    hoursEl.addEventListener('input',  updateEstimate);
+    hoursEl.addEventListener('input',   updateEstimate);
     updateEstimate();
 
-    // Address validation: at least one of From / To must be filled
-    document.getElementById('quoteForm').addEventListener('submit', function (e) {
-      const from  = document.getElementById('fieldFrom').value.trim();
-      const to    = document.getElementById('fieldTo').value.trim();
-      const errEl = document.getElementById('addressError');
+    // ── AJAX form submit ────────────────────────────────────────────
+    const form      = document.getElementById('quoteForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const modal     = document.getElementById('successModal');
 
-      if (!from && !to) {
-        e.preventDefault();
-        errEl.classList.remove('hidden');
-        document.getElementById('fieldFrom').classList.add('border-red-400');
-        document.getElementById('fieldTo').classList.add('border-red-400');
-        document.getElementById('fieldFrom').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        errEl.classList.add('hidden');
-        document.getElementById('fieldFrom').classList.remove('border-red-400');
-        document.getElementById('fieldTo').classList.remove('border-red-400');
-      }
+    function showModal() {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', hideModal);
+    document.getElementById('modalBackdrop').addEventListener('click', hideModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') hideModal();
     });
 
-    // Hide error as soon as user starts typing in either address field
-    ['fieldFrom', 'fieldTo'].forEach(function(id) {
-      document.getElementById(id).addEventListener('input', function() {
-        document.getElementById('addressError').classList.add('hidden');
-        document.getElementById('fieldFrom').classList.remove('border-red-400');
-        document.getElementById('fieldTo').classList.remove('border-red-400');
-      });
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Lock button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const resp = await fetch('/submit-quote', {
+          method: 'POST',
+          body: new FormData(form),
+        });
+
+        if (!resp.ok) throw new Error('Server error: ' + resp.status);
+
+        const data = await resp.json().catch(() => ({ status: 'success' }));
+
+        if (data.status === 'success' || resp.ok) {
+          form.reset();
+          updateEstimate();           // reset calculator display
+          showModal();
+        } else {
+          alert('Something went wrong. Please try again or call us directly.');
+        }
+
+      } catch (err) {
+        console.error('[quote form]', err);
+        alert('Could not send your request. Please check your connection and try again.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Request';
+      }
     });
   })();
 </script>
