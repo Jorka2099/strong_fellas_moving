@@ -14,7 +14,7 @@ node_modules
 .next/
 .DS_Store
 
-# Скомпилированный сервер Go (бинарник)
+# Build outputs
 /server
 *.exe
 *.exe~
@@ -22,10 +22,10 @@ node_modules
 *.so
 *.dylib
 
-# Папка с логами или кэшем встроенных инструментов
+# logs and IDE files
 .idea/
 .vscode/
 *.log
 
-# Временные файлы докера (если они вдруг создаются локально)
+# temporary docker file
 .env
