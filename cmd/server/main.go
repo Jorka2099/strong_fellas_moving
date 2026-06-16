@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"strong-fellas/internal/handlers"
 	"strong-fellas/internal/repository"
 
@@ -58,8 +59,21 @@ func main() {
 	http.HandleFunc("/admin/logout", handlers.AdminLogoutHandler)
 	http.HandleFunc("/admin/leads/export", handlers.AuthMiddleware(handlers.ExportLeadsHandler(dbPool)))
 
-	log.Println("Server is running on http://localhost:8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, using system environment variables")
+	}
+
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8080"
+	}
+
+	serverAddr := ":" + port
+
+	log.Printf("Server is running on port %s\n", port)
+
+	if err := http.ListenAndServe(serverAddr, nil); err != nil {
 		log.Fatalf("Failed to start server: %v\n", err)
 	}
 

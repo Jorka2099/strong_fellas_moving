@@ -1,16 +1,42 @@
-services: 
+version: '3.8'
+
+services:
+  # 1. DATABASE
   postgres_db:
     image: postgres:15-alpine
     container_name: strong_fellas_postgres
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER} 
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} 
-      POSTGRES_DB: ${POSTGRES_DBNAME} 
-    ports:   
-      - "5433:5432"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DBNAME}
+    ports:
+      - "5433:5432" 
     volumes:
       - pgdata_final:/var/lib/postgresql/data
+    networks:
+      - www_app
+
+  # 2. APP (WEB-SERVER)
+  web_app:
+    build: . 
+    container_name: strong_fellas_app
+    restart: always
+    ports:
+      - "80:8080" 
+    env_file:
+      - .env 
+    environment:
+      - POSTGRES_HOST=postgres_db
+      - POSTGRES_PORT=5432
+    depends_on:
+      - postgres_db # Приложение не запустится, пока не поднимется база
+    networks:
+      - www_app
 
 volumes:
   pgdata_final:
+
+networks:
+  www_app:
+    driver: bridge

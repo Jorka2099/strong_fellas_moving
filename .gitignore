@@ -15,6 +15,7 @@ node_modules
 .DS_Store
 
 # Build outputs
+main
 /server
 *.exe
 *.exe~
