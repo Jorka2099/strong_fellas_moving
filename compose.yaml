@@ -30,7 +30,7 @@ services:
       - POSTGRES_HOST=postgres_db
       - POSTGRES_PORT=5432
     depends_on:
-      - postgres_db # Приложение не запустится, пока не поднимется база
+      - postgres_db 
     networks:
       - www_app
 
