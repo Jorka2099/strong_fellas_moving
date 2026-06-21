@@ -38,7 +38,6 @@ func main() {
 	http.HandleFunc("/submit-quote", handlers.RateLimitMiddleware(handlers.SubmitQuoteHandler))
 
 	http.HandleFunc("/privacy.html", func(w http.ResponseWriter, r *http.Request) {
-		// Рендерим напрямую сам файл privacy.html
 		err := tmpl.ExecuteTemplate(w, "privacy.html", nil)
 		if err != nil {
 			http.Error(w, "Template error: "+err.Error(), http.StatusInternalServerError)
@@ -46,7 +45,6 @@ func main() {
 	})
 
 	http.HandleFunc("/terms.html", func(w http.ResponseWriter, r *http.Request) {
-		// Рендерим напрямую сам файл terms.html
 		err := tmpl.ExecuteTemplate(w, "terms.html", nil)
 		if err != nil {
 			http.Error(w, "Template error: "+err.Error(), http.StatusInternalServerError)

@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"html/template"
 	"net/http"
+	"os"
 	"sync"
 	"time"
-	"os"
 )
 
 var (
@@ -28,7 +28,7 @@ func getAdminPassword() string {
 		return ""
 	}
 	return pass
-}	
+}
 
 func AdminLoginHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
@@ -98,11 +98,11 @@ func AdminLogoutHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     sessionCookieName,
-		Value:    "",
-		Path:    "/",
-		MaxAge:  -1,
+		Name:   sessionCookieName,
+		Value:  "",
+		Path:   "/",
+		MaxAge: -1,
 	})
-	
+
 	http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
 }
